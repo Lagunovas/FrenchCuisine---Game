@@ -10,22 +10,34 @@ public class CharacterControllerSnail : MonoBehaviour {
     public float slowCoefficient = 0.5f;
 
     public Animator animator;
+    private bool available = true;
+    public Rigidbody rb;
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     // Update is called once per frame
     void Update () {
-        if (Input.GetButtonDown("Jump"))
+        if (available)
         {
-            animator.SetInteger("state", 2);
-            StartCoroutine(rollingMovement());
+            if (Input.GetButtonDown("Jump"))
+            {
+                available = false;
+                animator.SetInteger("state", 2);
+                StartCoroutine(rollingMovement());
+            }
+            else if ((Input.GetAxis("Horizontal") > 0) || (Input.GetAxis("Vertical") > 0))
+            {
+                animator.SetInteger("state", 1);
+                normalMovement();
+            }
+            else
+            {
+                animator.SetInteger("state", 0);
+            }
         }
-        else if((Input.GetAxis("Horizontal")>0 )|| (Input.GetAxis("Vertical") > 0))
-        {
-            animator.SetInteger("state", 1);
-            normalMovement();
-        }
-        else{
-            animator.SetInteger("state", 0);
-        }
+      
     }
 
     void normalMovement()
@@ -34,6 +46,7 @@ public class CharacterControllerSnail : MonoBehaviour {
         var z = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
 
         transform.Rotate(0, x, 0);
+        //rb.MovePosition(new Vector3(transform.position.x, transform.position.y, transform.position.z + z));
         transform.Translate(0, 0, z);
     }
     IEnumerator rollingMovement()
@@ -46,6 +59,7 @@ public class CharacterControllerSnail : MonoBehaviour {
             transform.Translate(0, 0, z);
             yield return null;
         }
+        available = true;
         
     }
     void slowedMovement()
