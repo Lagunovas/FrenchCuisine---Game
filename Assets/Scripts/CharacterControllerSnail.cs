@@ -9,22 +9,22 @@ public class CharacterControllerSnail : MonoBehaviour {
     public float rollingDuration = 1f;
     public float slowCoefficient = 0.5f;
 
-    public string state = "standby";
+    public Animator animator;
 
     // Update is called once per frame
     void Update () {
         if (Input.GetButtonDown("Jump"))
         {
-            state = "rolling";
+            animator.SetInteger("state", 2);
             StartCoroutine(rollingMovement());
         }
         else if((Input.GetAxis("Horizontal")>0 )|| (Input.GetAxis("Vertical") > 0))
         {
-            state = "walking";
+            animator.SetInteger("state", 1);
             normalMovement();
         }
         else{
-            state = "standby";
+            animator.SetInteger("state", 0);
         }
     }
 
