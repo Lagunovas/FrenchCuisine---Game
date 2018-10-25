@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1466,7 +1466,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4666584239395374, guid: eb6faa89de5e0f24cbc2ce788707c5c7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4666584239395374, guid: eb6faa89de5e0f24cbc2ce788707c5c7, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1474,7 +1474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4666584239395374, guid: eb6faa89de5e0f24cbc2ce788707c5c7, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4666584239395374, guid: eb6faa89de5e0f24cbc2ce788707c5c7, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6075,7 +6075,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-591828
+  m_Name: pb_Mesh-1126
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -6230,7 +6230,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-995756
+  m_Name: pb_Mesh-1488
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8113,7 +8113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4787475327073090, guid: 32eaedcc6b2e2204a971432f15a5d451, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 27
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4787475327073090, guid: 32eaedcc6b2e2204a971432f15a5d451, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8155,7 +8155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4787475327073090, guid: 32eaedcc6b2e2204a971432f15a5d451, type: 2}
       propertyPath: m_LocalScale.z
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32eaedcc6b2e2204a971432f15a5d451, type: 2}
