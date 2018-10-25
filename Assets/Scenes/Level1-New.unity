@@ -565,13 +565,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 131117980}
-  m_LocalRotation: {x: 0.49953213, y: 0.008650677, z: -0.0010350023, w: 0.8662516}
+  m_LocalRotation: {x: 0.5373152, y: 0.008074903, z: -0.0017206778, w: 0.8433411}
   m_LocalPosition: {x: 41.58871, y: 17.01096, z: -10.106623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 808168452}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 59.935, y: 1.5960001, z: 0.78300005}
+  m_LocalEulerAnglesHint: {x: 65, y: 1.5960001, z: 0.78300005}
 --- !u!114 &131117982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,8 +584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 643983204}
-  smoothSpeed: 10
-  offset: {x: 0, y: 20, z: -5}
+  smoothSpeed: 4
+  offset: {x: 0, y: 20, z: -9}
 --- !u!81 &131117983
 AudioListener:
   m_ObjectHideFlags: 0
@@ -601,8 +601,8 @@ Camera:
   m_GameObject: {fileID: 131117980}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
