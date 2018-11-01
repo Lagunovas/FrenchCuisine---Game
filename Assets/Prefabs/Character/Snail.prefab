@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 54835153636867848}
   - component: {fileID: 114541216022999882}
   - component: {fileID: 95919537760275046}
-  - component: {fileID: 65845341360633762}
+  - component: {fileID: 136264253326614350}
   m_Layer: 0
   m_Name: Snail
   m_TagString: Untagged
@@ -737,26 +737,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1899343434044402}
   serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Mass: 1
+  m_Drag: 10
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!65 &65845341360633762
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1899343434044402}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.62, y: 1, z: 1.31}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_CollisionDetection: 2
 --- !u!95 &95919537760275046
 Animator:
   serializedVersion: 3
@@ -801,9 +789,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467dcf69cafa6ee4395919a167cb9a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 8
   rotationSpeed: 220
   rollingDuration: 1
   slowCoefficient: 0.5
   animator: {fileID: 95919537760275046}
   rb: {fileID: 0}
+--- !u!136 &136264253326614350
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899343434044402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
