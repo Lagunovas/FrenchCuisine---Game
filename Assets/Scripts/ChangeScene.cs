@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;				//Library to change scene
 
 public class ChangeScene : MonoBehaviour {
 
-	public string LevelToLoad;
 
-	void LoadLevel()
+
+	public void LoadLevel(string LevelToLoad)
 	{
 		SceneManager.LoadScene(LevelToLoad);
 	}
