@@ -24,7 +24,7 @@ public class guardCon : MonoBehaviour
         transform.position = waypoints[1];
         int nextwaypointIndex = 2;
         Vector3 nextwaypoint = waypoints[nextwaypointIndex];
-        transform.LookAt(nextwaypoint);//guard face to next waypoint
+       transform.LookAt(nextwaypoint);//guard face to next waypoint
         while (true)
         {
             transform.position = Vector3.MoveTowards(transform.position, nextwaypoint, speed * Time.deltaTime);//guard move speed and route
@@ -40,11 +40,11 @@ public class guardCon : MonoBehaviour
     }
     IEnumerator guardrotation(Vector3 rotation)
     {
-        Vector3 GoNextWaypoint = (rotation - transform.position);
+        Vector3 GoNextWaypoint = (rotation - transform.position).normalized;
         float guardangle = 90 - Mathf.Atan2(GoNextWaypoint.z, GoNextWaypoint.x) * Mathf.Rad2Deg;
-        while (Mathf.DeltaAngle(transform.eulerAngles.y, guardangle) > 0.05f)
+        while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, guardangle)) > 0.03f)
         {
-            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, guardangle, Rotationspeed * Time.deltaTime);
+            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y , guardangle, Rotationspeed * Time.deltaTime);
             transform.eulerAngles = Vector3.up * angle;
             yield return null;
         }

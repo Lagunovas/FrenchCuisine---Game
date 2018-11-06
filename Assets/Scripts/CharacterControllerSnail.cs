@@ -55,7 +55,7 @@ public class CharacterControllerSnail : MonoBehaviour {
         while(elapsedTime < rollingDuration)
         {
             elapsedTime += Time.deltaTime;
-            var z = Time.deltaTime * movementSpeed * 2;
+            var z = Time.deltaTime * movementSpeed * 1.5f;
             transform.Translate(0, 0, z);
             yield return null;
         }
