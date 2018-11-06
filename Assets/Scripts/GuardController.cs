@@ -8,7 +8,7 @@ public class GuardController : MonoBehaviour {
 	[SerializeField] private bool moveMode; // false = 0 - 1 - 2 - 3 [->] 0, true = 0 - 1 - 2 - 3 (->) 3 - 2 - 1 - 0
 	private bool direction; // necessary for moveMode = true
 
-	private bool playerDetected;
+	private bool playerDetected; // Snail box trigger collider must be bigger than the cylinder collider.
 
 	private NavMeshAgent agent;
 	private Transform raycastOrigin;
@@ -24,7 +24,7 @@ public class GuardController : MonoBehaviour {
 
 	private void FixedUpdate() {
 		if (playerDetected) {
-			// Do something
+			Debug.Log("Player detected!");
 		} else {
 			if (target) {
 				agent.SetDestination(target.GetChild(targetIndex).position);
@@ -64,13 +64,28 @@ public class GuardController : MonoBehaviour {
 			switch (raycastHit.collider.tag) {
 				case "Trail": // Decrease the size of the trail collider?
 				case "Player": // Player - (snail "model" parts get detected seperately, create a collider which covers player?)
-					Debug.Log("Guard sees: " + raycastHit.collider);
+					//Debug.Log("Guard sees: " + raycastHit.collider);
+					if (!playerDetected) {
+						playerDetected = true;
+					}
 					break;
 				default:
 					break;
 			}
 		}
 
+	}
+
+	private void OnTriggerExit(Collider other) {
+		switch (other.tag) {
+			case "Player":
+				if (playerDetected) {
+					playerDetected = false;
+				}
+				break;
+			default:
+				break;
+		}
 	}
 
 }
