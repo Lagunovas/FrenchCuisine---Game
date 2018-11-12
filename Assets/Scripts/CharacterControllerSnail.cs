@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControllerSnail : MonoBehaviour {
     
@@ -69,5 +70,12 @@ public class CharacterControllerSnail : MonoBehaviour {
 
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
+    }
+   void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "BlueClinderFX") {
+            SceneManager.LoadScene("Menu");
+
+        }
     }
 }
