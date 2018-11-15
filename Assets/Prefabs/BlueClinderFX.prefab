@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4239419779887604}
   - component: {fileID: 136717427150122282}
   - component: {fileID: 111068432265942896}
+  - component: {fileID: 114688168805518728}
   m_Layer: 0
   m_Name: BlueClinderFX
   m_TagString: Untagged
@@ -390,6 +391,18 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114688168805518728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1718664697348862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a70b7f2ec655384f87c60b91ec77871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevel: Menu
 --- !u!136 &136717427150122282
 CapsuleCollider:
   m_ObjectHideFlags: 1
