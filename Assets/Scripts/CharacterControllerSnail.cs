@@ -36,6 +36,7 @@ public class CharacterControllerSnail : MonoBehaviour {
             slowed = false;
         }
     }
+
     // Update is called once per frame
     void Update () {
         if (available)
@@ -93,11 +94,10 @@ public class CharacterControllerSnail : MonoBehaviour {
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
     }
-   void OnCollisionEnter(Collision collision)
+    public void die()
     {
-        if (collision.gameObject.name == "BlueClinderFX") {
-            SceneManager.LoadScene("Menu");
-
-        }
+        animator.SetBool("isDead", true);
+        
+        
     }
 }
