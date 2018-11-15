@@ -7,17 +7,36 @@ public class CharacterControllerSnail : MonoBehaviour {
     
 	public float movementSpeed = 3f;
     public float rotationSpeed = 150f;
-    public float rollingDuration = 1f;
-    public float slowCoefficient = 0.5f;
+    public float rollingDuration = 0.7f;
+    public float slowCoefficient = 0.7f;
 
+    private bool slowed = false;
     public Animator animator;
     private bool available = true;
     public Rigidbody rb;
+    private TrailSystem TS;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        TS = GetComponent<TrailSystem>();
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Salt")
+        {
+            slowed = true;
+        }
+    }
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "Salt")
+        {
+            slowed = false;
+        }
+    }
+
     // Update is called once per frame
     void Update () {
         if (available)
@@ -25,13 +44,16 @@ public class CharacterControllerSnail : MonoBehaviour {
             if (Input.GetButtonDown("Jump"))
             {
                 available = false;
+                TS.enabled = false;
                 animator.SetInteger("state", 2);
                 StartCoroutine(rollingMovement());
             }
             else if ((Input.GetAxis("Horizontal") > 0) || (Input.GetAxis("Vertical") > 0))
             {
                 animator.SetInteger("state", 1);
-                normalMovement();
+                if (!slowed) { normalMovement(); }
+                else { slowedMovement(); }
+                
             }
             else
             {
@@ -61,7 +83,8 @@ public class CharacterControllerSnail : MonoBehaviour {
             yield return null;
         }
         available = true;
-        
+        TS.enabled = true;
+
     }
     void slowedMovement()
     {
@@ -71,11 +94,10 @@ public class CharacterControllerSnail : MonoBehaviour {
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
     }
-   void OnCollisionEnter(Collision collision)
+    public void die()
     {
-        if (collision.gameObject.name == "BlueClinderFX") {
-            SceneManager.LoadScene("Menu");
-
-        }
+        animator.SetBool("isDead", true);
+        
+        
     }
 }

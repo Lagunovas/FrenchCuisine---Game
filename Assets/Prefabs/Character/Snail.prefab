@@ -791,8 +791,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 8
   rotationSpeed: 220
-  rollingDuration: 1
-  slowCoefficient: 0.5
+  rollingDuration: 0.7
+  slowCoefficient: 0.3
   animator: {fileID: 95919537760275046}
   rb: {fileID: 0}
 --- !u!136 &136264253326614350
