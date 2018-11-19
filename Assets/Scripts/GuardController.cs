@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class GuardController : MonoBehaviour {
+    public GameObject gameoverUL;
 
-	[SerializeField] private Transform target;
+    [SerializeField] private Transform target;
 	private int targetIndex;
 	[SerializeField] private bool moveMode; // false = 0 - 1 - 2 - 3 [->] 0, true = 0 - 1 - 2 - 3 (->) 3 - 2 - 1 - 0
 	private bool direction; // necessary for moveMode = true
@@ -12,6 +16,8 @@ public class GuardController : MonoBehaviour {
 
 	private NavMeshAgent agent;
 	private Transform raycastOrigin;
+    
+    bool gameisover;
 
 	private void Start() {
 		agent = GetComponent<NavMeshAgent>();
@@ -22,8 +28,21 @@ public class GuardController : MonoBehaviour {
 		}
 	}
 
-	private void FixedUpdate() {
+	private void Update() {
 		if (playerDetected) {
+            Time.timeScale = 0;
+            if (gameisover) {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+
+                    SceneManager.LoadScene(2);
+                    Time.timeScale = 1;
+                }
+
+
+            }
+            onGameOver(gameoverUL);
+           
 			Debug.Log("Player detected!");
 		} else {
 			if (target) {
@@ -87,5 +106,12 @@ public class GuardController : MonoBehaviour {
 				break;
 		}
 	}
+    void onGameOver(GameObject GameOver) {
+        if(GameOver.gameObject.name=="GameOver")
+           GameOver.SetActive(true);
+        gameisover = true;
+        
+
+    }
 
 }
