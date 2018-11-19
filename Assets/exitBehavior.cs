@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class exitBehavior : MonoBehaviour {
-    public string nextLevel = "Menu";
+    
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(nextLevel);
+            SceneManager.LoadScene(4);
 
         }
     }
