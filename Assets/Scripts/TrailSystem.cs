@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TrailSystem : MonoBehaviour {
 
@@ -8,17 +6,19 @@ public class TrailSystem : MonoBehaviour {
     [SerializeField] private float delay;
     [SerializeField] private GameObject trailPrefab;
 
-    private float timeSinceLastTrail = 0;
+	private float timeSinceLastTrail;
+	private uint trailIdCounter;
 
-    private void Update()
-    {
+	private void Start() {
+		trailIdCounter = 1;
+	}
+
+	private void Update() {
         timeSinceLastTrail += Time.deltaTime;
-        if (delay <= timeSinceLastTrail)
-        {
+        if (delay <= timeSinceLastTrail) {
             timeSinceLastTrail = 0;
-            Instantiate(trailPrefab, generator.position, generator.rotation);
-        }
+			Instantiate(trailPrefab, generator.position, generator.rotation).GetComponent<TrailBehaviour>().id = trailIdCounter++;
+		}
     }
-
 
 }
