@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class exitBehavior : MonoBehaviour {
+
+	public string toScene;
     
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(toScene);
 
         }
     }
