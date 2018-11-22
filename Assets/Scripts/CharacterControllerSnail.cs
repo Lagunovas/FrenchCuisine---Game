@@ -7,7 +7,7 @@ public class CharacterControllerSnail : MonoBehaviour {
     public float rotationSpeed = 150f;
     public float rollingDuration = 0.7f;
     public float slowCoefficient = 0.7f;
-
+    public GameObject gameOverScreen;
     private bool slowed = false;
     public Animator animator;
     private bool available = true;
@@ -32,6 +32,13 @@ public class CharacterControllerSnail : MonoBehaviour {
         if (col.gameObject.tag == "Salt")
         {
             slowed = false;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "ennemy")
+        {
+            StartCoroutine(die());
         }
     }
 
@@ -92,10 +99,16 @@ public class CharacterControllerSnail : MonoBehaviour {
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
     }
-    public void die()
+    IEnumerator die()
     {
+        available = false;
+        gameObject.GetComponent<AudioSource>().Play();
         animator.SetBool("isDead", true);
-        
+        yield return null;
+        animator.SetBool("wasDead", true);
+        yield return new WaitForSeconds(3);
+        Instantiate(gameOverScreen);
+        Time.timeScale = 0f;
         
     }
 }
