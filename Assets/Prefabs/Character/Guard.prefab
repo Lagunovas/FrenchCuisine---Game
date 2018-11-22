@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 195155939574101046}
   m_Layer: 0
   m_Name: Guard
-  m_TagString: Untagged
+  m_TagString: ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b846aae58bdbf49971366230cdd752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  gameOver: {fileID: 0}
+  moveMode: 0
 --- !u!195 &195155939574101046
 NavMeshAgent:
   m_ObjectHideFlags: 1

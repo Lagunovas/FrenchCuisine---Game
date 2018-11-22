@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trail
   - Salt
+  - ennemy
   layers:
   - Default
   - TransparentFX
