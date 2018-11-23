@@ -313,7 +313,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b846aae58bdbf49971366230cdd752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: {fileID: 0}
+  isStatic: 0
+  rotationDirection: 0
+  minAngle: -90
+  maxAngle: 90
+  audioClips:
+  - {fileID: 8300000, guid: a7e3fe822278d9e499b122ba1d46705b, type: 3}
+  - {fileID: 8300000, guid: 83d761143d6cf2247a08f087bd54ce7a, type: 3}
+  - {fileID: 8300000, guid: aca561380a4857a44a79c6fd239f6c58, type: 3}
+  - {fileID: 8300000, guid: 0738126b835e90643ab0ad1e0ce29dd5, type: 3}
+  - {fileID: 8300000, guid: 82eaae946f52bc6419a478e6eb9cd769, type: 3}
+  - {fileID: 8300000, guid: 1c2e7adaf885f4f4ab83eac31097a84d, type: 3}
+  - {fileID: 8300000, guid: 143b6b0ef8b5fe94fbce9f605bcf5957, type: 3}
+  - {fileID: 8300000, guid: 8324fd6bd1fb27342bc2850183e684e6, type: 3}
+  - {fileID: 8300000, guid: 3c5b82aa06b9b744da1ceddbe4a506d5, type: 3}
+  - {fileID: 8300000, guid: e7355591d0a51fb48bafd31c8545b3d4, type: 3}
+  - {fileID: 8300000, guid: 101dd0c58e91f244a9ae2a80d992f37e, type: 3}
+  - {fileID: 8300000, guid: 101dd0c58e91f244a9ae2a80d992f37e, type: 3}
+  audioTimerMin: 3
+  audioTimerMax: 7
   moveMode: 0
 --- !u!195 &195155939574101046
 NavMeshAgent:

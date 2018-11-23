@@ -4,11 +4,23 @@ using UnityEngine.AI;
 
 public class GuardController : MonoBehaviour {
 
-    [SerializeField] private GameObject gameOver;
-	private bool isGameOver;
-
 	private Transform pathTarget;
 	private int targetIndex;
+
+	[SerializeField] private bool isStatic;
+
+	[SerializeField] private bool rotationDirection;
+	private float angleDelta;
+	private float startAngle;
+	private float currentAngle;
+	[SerializeField] private float minAngle;
+	[SerializeField] private float maxAngle;
+
+	[SerializeField] private AudioClip[] audioClips;
+	[SerializeField] private float audioTimerMin, audioTimerMax;
+	private float audioDelta;
+	private float playAudioAt = -1;
+	private AudioSource audioSource;
 
 	[SerializeField] private bool moveMode; // false = 0 - 1 - 2 - 3 [->] 0, true = 0 - 1 - 2 - 3 (->) 3 - 2 - 1 - 0
 	private bool direction; // necessary for moveMode = true
@@ -23,7 +35,7 @@ public class GuardController : MonoBehaviour {
 
 	private int playerRaycastLayerMask;
 	private int trailRaycastLayerMask;
-    
+
 	private void Start() {
 		agent = GetComponent<NavMeshAgent>();
 		raycastOrigin = transform.Find("RaycastPosition");
@@ -38,9 +50,12 @@ public class GuardController : MonoBehaviour {
 			pathTarget = environment.transform.Find(name + "-Target");
 		}
 
-		if (!pathTarget) {
+		if (!pathTarget && !isStatic) {
 			Debug.LogError("No path target has been set for: " + this);
 		}
+
+		startAngle = currentAngle = transform.rotation.eulerAngles.y;
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	// NOT TESTED - will test later (lazy me)
@@ -84,15 +99,6 @@ public class GuardController : MonoBehaviour {
 
 	private void Update() {
 		if (playerDetected) {
-			/*Time.timeScale = 0;
-            if (isGameOver) {
-                if (Input.GetKeyDown(KeyCode.R)) {
-                    SceneManager.LoadScene(2);
-                    Time.timeScale = 1;
-                }
-            }
-            OnGameOver(gameoverUL);*/
-
 			if (IsTargetVisible(followee, trailRaycastLayerMask) && followee) {
 				agent.SetDestination(followee.position);
 			} else {
@@ -105,7 +111,7 @@ public class GuardController : MonoBehaviour {
 				followingTrail = false;
 				followedTrailId = 0;
 			}
-		} else {
+		} else if (!isStatic) {
 			if (pathTarget) {
 				agent.SetDestination(pathTarget.GetChild(targetIndex).position);
 				if (!agent.hasPath && !agent.pathPending && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0) {
@@ -130,6 +136,56 @@ public class GuardController : MonoBehaviour {
 				}
 
 			}
+		} else {
+
+			if (pathTarget.position.x != transform.position.x && pathTarget.position.y != transform.position.y) {
+				agent.SetDestination(pathTarget.position);
+				currentAngle = transform.rotation.eulerAngles.y;
+			} else {
+				angleDelta = angleDelta > 1 ? 1 : angleDelta + Time.deltaTime / 4f;
+
+				if (rotationDirection) {
+					if (currentAngle < maxAngle) {
+						currentAngle = Mathf.Lerp(startAngle, maxAngle, angleDelta);
+						transform.rotation = Quaternion.Euler(0, currentAngle, 0);
+					} else {
+						rotationDirection = !rotationDirection;
+						angleDelta = 0;
+						startAngle = maxAngle;
+					}
+				} else {
+					if (currentAngle > minAngle) {
+						currentAngle = Mathf.Lerp(startAngle, minAngle, angleDelta);
+						transform.rotation = Quaternion.Euler(0, currentAngle, 0);
+					} else {
+						rotationDirection = !rotationDirection;
+						angleDelta = 0;
+						startAngle = minAngle;
+					}
+				}
+			}
+		}
+
+		AudioLogic(playerDetected || followingTrail);
+	}
+
+	private void AudioLogic(bool execute) {
+		if (execute) {
+			audioDelta += Time.deltaTime;
+
+			if (playAudioAt == -1) {
+				playAudioAt = Random.Range(audioTimerMin, audioTimerMax);
+			} else {
+				if (audioDelta >= playAudioAt && !audioSource.isPlaying) {
+					audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
+					audioSource.Play();
+					audioDelta = 0;
+					playAudioAt = -1;
+				}
+			}
+		} else {
+			audioDelta = 0;
+			playAudioAt = -1;
 		}
 	}
 
@@ -193,12 +249,5 @@ public class GuardController : MonoBehaviour {
 			}
 		}
 	}
-
-	private void OnGameOver() {
-		if (gameOver) {
-			gameOver.SetActive(true);
-			isGameOver = true;
-		}
-    }
 
 }
