@@ -55,6 +55,8 @@ public class GuardController : MonoBehaviour {
 		}
 
 		startAngle = currentAngle = transform.rotation.eulerAngles.y;
+		minAngle += startAngle;
+		maxAngle += startAngle;
 		audioSource = GetComponent<AudioSource>();
 	}
 
@@ -137,10 +139,10 @@ public class GuardController : MonoBehaviour {
 
 			}
 		} else {
-
-			if (pathTarget.position.x != transform.position.x && pathTarget.position.y != transform.position.y) {
+			if (agent.pathStatus != NavMeshPathStatus.PathComplete || Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(pathTarget.position.x, pathTarget.position.z)) > 1) {
 				agent.SetDestination(pathTarget.position);
-				currentAngle = transform.rotation.eulerAngles.y;
+				currentAngle = startAngle = transform.rotation.eulerAngles.y; // needs fix
+				angleDelta = 0;
 			} else {
 				angleDelta = angleDelta > 1 ? 1 : angleDelta + Time.deltaTime / 4f;
 
