@@ -26,6 +26,10 @@ public class CharacterControllerSnail : MonoBehaviour {
         {
             slowed = true;
         }
+		else if (col.gameObject.tag == "Lettuce")
+		{
+			Destroy(col.gameObject);
+		}
     }
     void OnTriggerExit(Collider col)
     {
