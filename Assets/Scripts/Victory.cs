@@ -32,7 +32,8 @@ public class Victory : MonoBehaviour {
     }
     void onNLClick() {
 
-        SceneManager.LoadScene(3);
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index+1);
 
     }
 }

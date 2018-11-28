@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CharacterControllerSnail : MonoBehaviour {
-    
-	public float movementSpeed = 3f;
+public class CharacterControllerSnail : MonoBehaviour
+{
+
+    public float movementSpeed = 3f;
     public float rotationSpeed = 150f;
     public float rollingDuration = 0.7f;
     public float slowCoefficient = 0.7f;
-    public GameObject gameOverScreen;
+    public GameObject GameOver;
+    public GameObject Victory1;
     private bool slowed = false;
     public Animator animator;
-    private bool available = true;
+    public bool available = true;
     public Rigidbody rb;
+    public GameObject Snail;
     private TrailSystem TS;
+    bool gameisover;
+
+
+
 
     void Start()
     {
@@ -26,10 +34,14 @@ public class CharacterControllerSnail : MonoBehaviour {
         {
             slowed = true;
         }
-		else if (col.gameObject.tag == "Lettuce")
-		{
-			Destroy(col.gameObject);
-		}
+        // Updated upstream
+        else if (col.gameObject.tag == "Lettuce")
+        {
+            Destroy(col.gameObject);
+        }
+
+
+        // Stashed changes
     }
     void OnTriggerExit(Collider col)
     {
@@ -40,16 +52,30 @@ public class CharacterControllerSnail : MonoBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "ennemy")
+        if (collision.gameObject.tag == "ennemy")
         {
             StartCoroutine(die());
+           
+        }
+        if (collision.gameObject.name == "BlueClinderFX")
+        {
+            onVictory(Victory1);
+            onSnail(Snail);
+
         }
     }
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate()
+    {
+        if (gameisover) {
+        Reset();
+        onSnail(Snail);
+        onGameOver(GameOver);
+        }
         if (available)
         {
+          
             if (Input.GetButtonDown("Jump"))
             {
                 available = false;
@@ -62,14 +88,15 @@ public class CharacterControllerSnail : MonoBehaviour {
                 animator.SetInteger("state", 1);
                 if (!slowed) { normalMovement(); }
                 else { slowedMovement(); }
-                
+
             }
-            else
+            else 
             {
                 animator.SetInteger("state", 0);
             }
+            
         }
-      
+       
     }
 
     void normalMovement()
@@ -84,7 +111,7 @@ public class CharacterControllerSnail : MonoBehaviour {
     IEnumerator rollingMovement()
     {
         float elapsedTime = 0f;
-        while(elapsedTime < rollingDuration)
+        while (elapsedTime < rollingDuration)
         {
             elapsedTime += Time.deltaTime;
             var z = Time.deltaTime * movementSpeed * 1.5f;
@@ -103,7 +130,7 @@ public class CharacterControllerSnail : MonoBehaviour {
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
     }
-    IEnumerator die()
+   IEnumerator die()
     {
         available = false;
         gameObject.GetComponent<AudioSource>().Play();
@@ -111,8 +138,58 @@ public class CharacterControllerSnail : MonoBehaviour {
         yield return null;
         animator.SetBool("wasDead", true);
         yield return new WaitForSeconds(3);
-        Instantiate(gameOverScreen);
-        Time.timeScale = 0f;
-        
+        Reset();
+        onSnail(Snail);
+        onGameOver(GameOver);
+
+
+
+
+
+
+
+        //Time.timeScale = 0f;
+
     }
-}
+    void onSnail(GameObject Snail)
+    {
+        if (Snail.gameObject.name == "Snail")
+        {
+            Snail.SetActive(false);
+            gameisover = true;
+
+
+        }
+    }
+    void onGameOver(GameObject GameOver)
+    {
+        if (GameOver.gameObject.name == "GameOver")
+            GameOver.SetActive(true);
+        gameisover = true;
+
+
+    }
+
+    void onVictory(GameObject Victory1)
+    {
+        if (Victory1.gameObject.name == "Victory1")
+            Victory1.SetActive(true);
+        gameisover = true;
+    }
+   void Reset()
+    {
+        
+        
+           if (Input.GetKeyDown(KeyCode.R))
+            {
+                
+                int index = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(index);
+            }
+        gameisover = true;
+        }
+    }
+
+
+   
+

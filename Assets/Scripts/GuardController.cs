@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GuardController : MonoBehaviour {
 
 	private Transform pathTarget;
 	private int targetIndex;
-
-	[SerializeField] private bool isStatic;
+   
+    [SerializeField] private bool isStatic;
 
 	[SerializeField] private bool rotationDirection;
 	private float angleDelta;
@@ -101,7 +102,8 @@ public class GuardController : MonoBehaviour {
 
 	private void Update() {
 		if (playerDetected) {
-			if (IsTargetVisible(followee, trailRaycastLayerMask) && followee) {
+          
+            if (IsTargetVisible(followee, trailRaycastLayerMask) && followee) {
 				agent.SetDestination(followee.position);
 			} else {
 				playerDetected = false;
@@ -251,5 +253,8 @@ public class GuardController : MonoBehaviour {
 			}
 		}
 	}
+    
 
 }
+
+
