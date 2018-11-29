@@ -225,6 +225,7 @@ public class GuardController : MonoBehaviour {
 					followee = other.transform;
 				}
 			}
+			playAudioAt = audioDelta = 0;
 		}
 	}
 
@@ -237,6 +238,7 @@ public class GuardController : MonoBehaviour {
 					followedTrailId = 0;
 				}
 			}
+			playAudioAt = audioDelta = 0;
 		}
 	}
 
