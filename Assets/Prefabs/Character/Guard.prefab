@@ -427,8 +427,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 101dd0c58e91f244a9ae2a80d992f37e, type: 3}
   - {fileID: 8300000, guid: 101dd0c58e91f244a9ae2a80d992f37e, type: 3}
   audioTimerMin: 3
-  audioTimerMax: 7
+  audioTimerMax: 5
   moveMode: 0
+  speedMultiplierOnDetection: 2
 --- !u!195 &195155939574101046
 NavMeshAgent:
   m_ObjectHideFlags: 1

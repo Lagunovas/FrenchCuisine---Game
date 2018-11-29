@@ -29,6 +29,10 @@ public class GuardController : MonoBehaviour {
 	private uint followedTrailId;
 	private Transform followee;
 
+	private NavMeshAgent navMeshAgent;
+	[SerializeField] private float speedMultiplierOnDetection = 1;
+	private float defaultSpeed;
+
 	private NavMeshAgent agent;
 	private Transform raycastOrigin;
 
@@ -57,6 +61,8 @@ public class GuardController : MonoBehaviour {
 		minAngle += startAngle;
 		maxAngle += startAngle;
 		audioSource = GetComponent<AudioSource>();
+		navMeshAgent = GetComponent<NavMeshAgent>();
+		defaultSpeed = navMeshAgent.speed;
 	}
 
 	private int getClosestPathIndex() {
@@ -168,6 +174,8 @@ public class GuardController : MonoBehaviour {
 			}
 		}
 
+		navMeshAgent.speed = followee ? defaultSpeed * speedMultiplierOnDetection : defaultSpeed;
+
 		AudioLogic(playerDetected || followingTrail);
 	}
 
@@ -223,9 +231,9 @@ public class GuardController : MonoBehaviour {
 					followingTrail = true;
 					followedTrailId = trailId;
 					followee = other.transform;
+					playAudioAt = audioDelta = 0;
 				}
 			}
-			playAudioAt = audioDelta = 0;
 		}
 	}
 
@@ -236,9 +244,9 @@ public class GuardController : MonoBehaviour {
 					followee = other.transform;
 					followingTrail = false;
 					followedTrailId = 0;
+					playAudioAt = audioDelta = 0;
 				}
 			}
-			playAudioAt = audioDelta = 0;
 		}
 	}
 
