@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class GuardController : MonoBehaviour {
 
@@ -61,7 +59,6 @@ public class GuardController : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 	}
 
-	// NOT TESTED - will test later (lazy me)
 	private int getClosestPathIndex() {
 		var navMeshPath = new NavMeshPath();
 		var childCount = pathTarget.childCount;
@@ -85,7 +82,7 @@ public class GuardController : MonoBehaviour {
 			}
 		}
 
-		int returnIndex = -1;
+		int returnIndex = 0;
 		float leastDistance = float.MaxValue;
 
 		for (int i = 0; i < pathLengths.Length; i++) {
@@ -96,7 +93,6 @@ public class GuardController : MonoBehaviour {
 				returnIndex = i;
 			}
 		}
-
 		return returnIndex;
 	}
 
@@ -107,6 +103,7 @@ public class GuardController : MonoBehaviour {
 				agent.SetDestination(followee.position);
 			} else {
 				playerDetected = false;
+				targetIndex = getClosestPathIndex();
 			}
 		} else if (followingTrail) {
 			if (followee) {
@@ -114,6 +111,7 @@ public class GuardController : MonoBehaviour {
 			} else {
 				followingTrail = false;
 				followedTrailId = 0;
+				targetIndex = getClosestPathIndex();
 			}
 		} else if (!isStatic) {
 			if (pathTarget) {
@@ -254,7 +252,4 @@ public class GuardController : MonoBehaviour {
 		}
 	}
     
-
 }
-
-
