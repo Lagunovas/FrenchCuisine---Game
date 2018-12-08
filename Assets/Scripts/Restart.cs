@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Restart : MonoBehaviour {
 
 	public string levelNumber;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.R))
-		{
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.R)) {
 			Application.LoadLevel(levelNumber);
 		}
 	}
+
 }

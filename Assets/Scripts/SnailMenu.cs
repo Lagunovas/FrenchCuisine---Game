@@ -2,29 +2,22 @@
 
 public class SnailMenu : MonoBehaviour {
 
-    public float movementSpeed = 3f;
+	public float movementSpeed = 3f;
 
-    public Animator animator;
-    private bool available = true;
+	public Animator animator;
 
-    void Update()
-    {
+	private void Update() {
+		animator.SetInteger("state", 1);
+		NormalMovement();
+	}
 
+	private void NormalMovement() {
+		var z = Time.deltaTime * movementSpeed;
 
-                animator.SetInteger("state", 1);
-                normalMovement();
+		transform.Translate(0, 0, z);
+		if (transform.position.z >= 30) {
+			transform.position = new Vector3(transform.position.x, transform.position.y, -30);
+		}
+	}
 
-    }
-
-    void normalMovement()
-    {
-        
-        var z =  Time.deltaTime * movementSpeed;
-
-        transform.Translate(0, 0, z);
-        if (transform.position.z >= 30)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -30) ;
-        }
-    }
 }

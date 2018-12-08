@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;				//Library to change scene
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour {
 
-
-
-	public void LoadLevel(string LevelToLoad)
-	{
+	public void LoadLevel(string LevelToLoad) {
 		SceneManager.LoadScene(LevelToLoad);
 	}
+
 }

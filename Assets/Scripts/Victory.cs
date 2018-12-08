@@ -1,39 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour {
-    private Button BackMenu;
-    private Button NextLevel;
-    
+	private Button BackMenu;
+	private Button NextLevel;
 
-    // Use this for initialization
-    void Start () {
-        GetComponent();
-        BackMenu.onClick.AddListener(onBMClick);
-        NextLevel.onClick.AddListener(onNLClick);
+	private void Start() {
+		BackMenu = transform.Find("BackMenu").GetComponent<Button>();
+		NextLevel = transform.Find("NextLevel").GetComponent<Button>();
+		BackMenu.onClick.AddListener(OnBMClick);
+		NextLevel.onClick.AddListener(OnNLClick);
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
-    void GetComponent() {
-        BackMenu = transform.Find("BackMenu").GetComponent<Button>();
-        NextLevel = transform.Find("NextLevel").GetComponent<Button>();
 
-    }
-    void onBMClick() {
-        SceneManager.LoadScene("Menu");
+	private void OnBMClick() {
+		SceneManager.LoadScene("Menu");
+	}
 
-    }
-    void onNLClick() {
+	private void OnNLClick() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
 
-        int index = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(index+1);
-
-    }
 }
